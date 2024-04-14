@@ -87,7 +87,6 @@ export default {
           description: "Description for Service 7",
           image: "https://via.placeholder.com/400x300",
         },
-        // Adicione mais serviços conforme necessário
       ],
       currentOffset: 0,
       currentSlide: 0,
