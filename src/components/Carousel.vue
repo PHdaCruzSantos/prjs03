@@ -1,5 +1,7 @@
 <template>
-  <div class="block h-96 overflow-hidden content-normal p-3 relative">
+  <div
+    class="block h-96 overflow-hidden content-normal pr-7 pl-7 pb-3 pt-3 relative"
+  >
     <div class="flex overflow-hidden relative">
       <div
         v-for="(service, index) in services"
@@ -27,12 +29,16 @@
     <button
       class="prev absolute w-10 h-10 bg-slate-400 rounded-full ring-1 ring-indigo-600 transition duration-500 ease-in-out tranform hover:scale-110 hover:bg-indigo-600 text-indigo-600 hover:text-white"
       @click="prevSlide"
+      :class="{ hidden: currentOffset === 0 }"
     >
       <span class="">&#10094;</span>
     </button>
     <button
       class="next absolute w-10 h-10 bg-slate-400 rounded-full ring-1 ring-indigo-600 transition duration-500 ease-in-out tranform hover:scale-110 hover:bg-indigo-600 text-indigo-600 hover:text-white"
       @click="nextSlide"
+      :class="{
+        hidden: currentSlide >= services.length * 2,
+      }"
     >
       <span class="">&#10095;</span>
     </button>
@@ -87,6 +93,36 @@ export default {
           description: "Description for Service 7",
           image: "https://via.placeholder.com/400x300",
         },
+        {
+          id: 8,
+          title: "Service 8",
+          description: "Description for Service 8",
+          image: "https://via.placeholder.com/400x300",
+        },
+        {
+          id: 9,
+          title: "Service 9",
+          description: "Description for Service 9",
+          image: "https://via.placeholder.com/400x300",
+        },
+        {
+          id: 10,
+          title: "Service 10",
+          description: "Description for Service 10",
+          image: "https://via.placeholder.com/400x300",
+        },
+        {
+          id: 11,
+          title: "Service 11",
+          description: "Description for Service 11",
+          image: "https://via.placeholder.com/400x300",
+        },
+        {
+          id: 12,
+          title: "Service 12",
+          description: "Description for Service 12",
+          image: "https://via.placeholder.com/400x300",
+        },
       ],
       currentOffset: 0,
       currentSlide: 0,
@@ -94,18 +130,21 @@ export default {
   },
   methods: {
     nextSlide() {
-      if (this.currentOffset === (this.services.length - 1) * 100) return;
+      if (this.currentOffset === this.services.length - 3) return;
       this.currentOffset += 100;
-      this.currentSlide++;
+      this.currentSlide += 3;
+      console.log("nextSlide: ", this.currentSlide);
+      console.log("services.length: ", this.services.length);
     },
     prevSlide() {
       if (this.currentOffset === 0) return;
       this.currentOffset -= 100;
-      this.currentSlide--;
+      this.currentSlide -= 3;
+      console.log("prevSlide: ", this.currentSlide);
     },
     goToSlide(index) {
-      this.currentOffset = index * 100;
-      this.currentSlide = index;
+      this.currentOffset = index * (100 / 3);
+      this.currentSlide = index * 3;
     },
   },
 };
@@ -113,7 +152,7 @@ export default {
 
 <style scoped>
 .carousel-slide {
-  flex: 0 0 100%;
+  flex: 0 0 calc(100% / 3);
   transition: transform 0.5s ease;
 }
 
